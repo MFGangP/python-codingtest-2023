@@ -18,7 +18,7 @@ def printNode(start):   # 노드 보여주는 함수
     while current.link != None:
         current = current.link
         if current.link == None:
-            print(current.data, end=' -> None')
+            print(current.data,)
         else:
             print(current.data, end=' -> ')
 
@@ -59,6 +59,41 @@ def insertNode(findData, insertData):
     current.link = node
     return
 
+# 노드 삭제
+
+def deleteNode(deletedData):
+    global memory, pre, current, head
+
+    if head.data == deletedData:# 첫번째 노드가 삭제해야하는 노드면
+        current = head  # current노드가 head를 보게 만듦
+        head = head.link # head 노드를 두번째 노드로 변경
+        del(current)    # current 삭제
+        return          # 결과적으로 head가 첫번째 노드가 됌
+
+    # 삭제하려고 했던 노드가 첫번째 노드가 아니였다면
+    current = head  # current도 첫번째 노드
+    while current.link != None: # 첫번째 이외 노드 삭제
+        pre = current   # 모두 첫번째 노드 가리킴
+        current = current.link # 두번째 노드 가리킴
+        if current.data == deletedData: # current 데이터가 삭제해야하는 데이터면
+            pre.link = current.link # current가 가리키는 노드를 pre가 가리킴
+            del(current)
+            return
+
+# 노드 검색
+
+def findNode(findData):
+    global memory, pre, current, head
+
+    current = head  # 첫 번째 노드를 가리킴
+    if current.data == findData: # 지금 보는 노드의 데이터가 찾는 데이터면
+        return(current) # 현재 노드 반환
+    while current.link != None: # None이 나올 때 까지 
+        current = current.link # 현재 보는 노드를 다음 노드로 변경
+        if current.data == findData: # 다음 노드가 찾는 데이터라면
+            return current # 데이터 반환
+    return Node() # 다 돌았는데 안나오면 빈노드 반환
+
 if __name__ == '__main__':
     node = Node() # 객체, 클래스 생성자
     # 빈 노드를 node라는 이름으로 만든다.
@@ -66,12 +101,49 @@ if __name__ == '__main__':
     head = node  # head를 새로 만든 노드 데이터랑 같게 만들기 
     memory.append(node) # 메모리에 새로만든 노드 더하기
     # head == node
-    
+
     for data in dataArray[1:]: # 두번째 노드 이후 4번 반복
         pre = node  # pre가 '다현'을 가리킴
         node = Node()   # node를 새로운 노드로 바꿈
         node.data = data    # data 내부 값은 정연, 쯔위, 사나, 지효 순
+        # 새로 만든 노드 데이터를 다음 값인 쯔위로 삽입
         pre.link = node # pre 노드가 가르킬 다음 노드를 node로 지정
         memory.append(node) # 메모리에 node 추가
+    # head 맨 앞, pre는 내가 새로 만든 값 바로 앞의 값
+    printNode(head) # 전체 출력
 
-printNode(head) # 전체 출력
+    print('노드 추가 --------------')
+
+    insertNode('다현', '화사')  # 맨 앞에 화사 노드 추가
+    printNode(head)
+
+    insertNode('사나', '솔라')  # 사나 앞에 솔라 노드 추가
+    printNode(head)
+
+    insertNode('재남', '문별')  # 재남이 없기 때문에 맨 마지막에 문별 추가
+    printNode(head)
+
+    print('노드 삭제 --------------')
+
+    deleteNode('화사')
+    printNode(head)
+
+    deleteNode('지효')
+    printNode(head)
+    
+    deleteNode('재남')  # 삭제할 데이터가 없음.
+    printNode(head)     # 그전이랑 똑같이 나옴
+
+    print('노드 검색 --------------')
+
+    result = findNode('정현') 
+    if result.data != None:
+        print('검색한 데이터가 존재합니다.')
+    else:
+        print('검색한 데이터가 존재하지 않습니다.')
+
+    result = findNode('재남') 
+    if result.data != None:
+        print('데이터가 존재합니다.')
+    else:
+        print('검색한 데이터가 존재하지 않습니다.')
