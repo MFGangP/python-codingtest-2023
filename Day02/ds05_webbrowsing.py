@@ -2,7 +2,7 @@
 
 import ds04_stack as st
 import webbrowser   # 웹브라우저 모듈
-import time
+import time         
 
 st.SIZE = 100
 st.stack = [None for _ in range(st.SIZE)]

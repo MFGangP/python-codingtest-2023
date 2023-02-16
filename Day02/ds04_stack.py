@@ -21,10 +21,10 @@ def isStackEmpty():
 
 # 스택에 데이터 추가
 def push(data):
-    global SIZE, stack, top # 전역변수를 그대로 함수에서도 쓰겠다.
-    if (isStackFull()):     # 만약 스택이 다 찼으면
-        print('Stack is Full') # 다 찼다
-        return              #
+    global SIZE, stack, top     # 전역변수를 그대로 함수에서도 쓰겠다.
+    if (isStackFull()):         # 만약 스택이 다 찼으면
+        print('Stack is Full')  # 다 찼다
+        return                  #
     else:
         top += 1            # 안찼으면 top + 1 해주고
         stack[top] = data   # 데이터 추가
