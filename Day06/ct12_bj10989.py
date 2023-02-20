@@ -11,5 +11,5 @@ for i in range(N):  # N개 만큼 반복
 
 for i in range(10001): # 10001개 만큼 반복 
     if count[i] != 0: # 값이 0이 아니면(0이면 굳이 표시할 필요가 없음)
-        for _ in range(count[i]): # 해당하는 숫자에 해당하는 인덱스 값 출력
-            print(i)
+        for _ in range(count[i]): # 0해당하는 숫자에 해당하는 횟수 만큼
+            print(i)    # 인덱스 값 출력
