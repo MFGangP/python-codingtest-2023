@@ -23,11 +23,11 @@ def DFS(v):
             DFS(i)
 
 # BFS 함수 정의
-def BFS(v):
+def BFS(v): 
     queue = deque()
     queue.append(v)
     visited[v] = True
-    while queue:
+    while queue: # queue.empty() != True
         now_Node = queue.popleft() # queue.get()
         print(now_Node, end=' ')
         for i in A[now_Node]:
