@@ -1,7 +1,7 @@
 # 백준 1717번 - 집합 표현하기
 import sys
 input = sys.stdin.readline
-sys.setrecursionlimit(100000)
+sys.setrecursionlimit(10 ** 5)
 N, M = map(int, input().split()) # 원소 개수, 질의 개수
 parent = [0] * (N + 1) # 0번 안쓸거다. [0 for _ in range(N + 1)]
 
@@ -9,9 +9,7 @@ def find(a):    # find 연산
     if a == parent[a]: # 노드랑 자기 자신 대표 노드가 같다면 
         return a # 노드 리턴
     else: # 같지 않다면
-        parent[a] = find(parent[a]) 
-        # 대표 노드의 대표 노드 검색 
-        # 재귀 호출 -> 경로 압축
+        parent[a] = find(parent[a]) # 대표 노드의 대표 노드 검색, 재귀 호출 -> 경로 압축
         return parent[a] # 찾은 대표노드 리턴
 
 def union(a, b):    # 대표노드 변경 (끼리 합치기)
@@ -31,7 +29,7 @@ def checkSame(a, b):    # 같은지 체크
     # 둘이 다르다면 False
     return False
 
-for i in range(0, N+1): # 원소 개수만큼
+for i in range(0, N + 1): # 원소 개수만큼
     parent[i] = i # 자기자신 대표노드로 초기화
 
 for i in range(M): # 질문 개수만큼
@@ -40,6 +38,6 @@ for i in range(M): # 질문 개수만큼
         union(a, b)
     else: # 1이면 체크
         if checkSame(a, b):
-            print('Yes')
+            print('YER')
         else:
-            print('No')
+            print('NO')
