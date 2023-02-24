@@ -5,9 +5,9 @@ input = sys.stdin.readline
 sys.setrecursionlimit(10 ** 5)
 N, M = map(int, input().split())
 parent = [0] * (N + 1)  # [0 for _ in range(N+1)]
-
+# int 리스트  N+1개 만들기
 def find(a): # find 연산
-    if a == parent[a]:
+    if a == parent[a]: # a
         return a
     else:
         parent[a] = find(parent[a]) # 재귀호출 -> 경로압축!!
