@@ -9,16 +9,35 @@ for time in range(1, T+1):
 
     N = int(input())
 
-    array = [[0] for _ in range(N)]
+    array = [[0] * N for _ in range(N)]
 
-    for i in range(N):
-        for j in range(N):
-            for di, dj in [[0,1], [1,0], [0,-1], [-1,0]]:
-                for c in range(1, N+1):
-                    ni, nj = i+di*c, j+dj*c
-                    if 0<=ni<N and 0<=nj<N:
-                        array[ni][nj] += 1
+    snail_num = 1
+    i, j = 0, 0
+
+    di = [0, 1, 0, -1] 
+    dj = [1, 0, -1, 0]
+    direction = 0
+
+    # 몇 번 돌아야할 지 모르니까 while
+    while(snail_num <= N*N):
+        # 서있는 곳에 값 대입
+        array[i][j] = snail_num
+        # 값 넣어줬으니까 +1
+        snail_num += 1
+
+        # 다음 좌표가 어디인지 1차 계산
+        ni = i + di[direction]
+        nj = j + dj[direction]
+        # 만약 다음 좌표에 값이 0이거나 범위를 초과했을 경우 재 계산
+        if not (0<=ni<N and 0<=nj<N and array[ni][nj] == 0):
+            # 1 더한 다음 나머지 값을 재 대입
+            direction = (direction + 1) % 4
+            # 다음 좌표가 어디인지 2차 계산
+            ni = i + di[direction]
+            nj = j + dj[direction]
+        # 위치 업데이트
+        i, j = ni, nj
 
     print(f"#{time}")
-    for i in range(len(array)):
-        print(*array[i])
+    for idx in range(N):
+        print(*array[idx])
