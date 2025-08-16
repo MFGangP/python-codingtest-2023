@@ -2,13 +2,18 @@ import sys
 sys.stdin = open("paper_input.txt", mode='r')
 sys.stdout = open("paper_output.txt", mode='w') 
 
-def dp(boxsize):
+def dp(n):
+    if n == 10:
+        return 1
+    if n == 20:
+        return 3
 
-    pass
+    return dp(n - 10) + 2 * dp(n - 20)
 
-# 테스트 케이스는 50가지
-for testcase in range(1, 51):
-    # 10의 배수인 사각형 길이
+T = int(input())
+
+for testcase in range(1, T+1):
     N = int(input())
-    
-    dp_array = [[0] for _ in range(301)]
+
+    result = dp(N)
+    print(f"#{testcase} {result}")
