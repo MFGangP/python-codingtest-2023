@@ -20,30 +20,44 @@ def insert_node_in_vertex_list(nodes, vertex1, vertex2):
 
 def search_root(vertex1, vertex2, S, G, visited):
     # 출발지는 0으로 고정이기 때문에 스택에 등록
-    stack = [S]
+    stack = []
+    current_node = S
     visited[S] = True
     # 스택이 비어있지 않으면 계속해서 반복
-    while stack:
-        # 현재 노드는 스택에서 꺼내서 확인
-        current_node = stack.pop()
-
+    while True:
         # 현재 노드가 도착 지점이라면
         if current_node == G:
             return 1
 
-        # vertex에 현재 노드 값이 빈값이 아니고 방문한적이 없는 노드라면 방문        
+        # vertex에 현재 노드 값이 빈값이 아니고 다음 노드가 방문한적이 없는 노드라면 방문        
         # vertex1에 연결된 노드가 있다면
         if vertex1[current_node] is not None and not visited[vertex1[current_node]]:
-            visited[vertex1[current_node]] = True
-            stack.append(vertex1[current_node])
+            # 현재 노드를 방문한 노드 기록에 저장하고
+            stack.append(current_node)
+            # 현재 노드 정보를 다음 목적지로 변경
+            current_node = vertex1[current_node]
+            # 다음 목적지 방문 기록을 True로 변경
+            visited[current_node] = True
 
         # vertex2에 연결된 노드가 있다면
-        if vertex2[current_node] is not None and not visited[vertex2[current_node]]:
-            visited[vertex2[current_node]] = True
-            stack.append(vertex2[current_node])
+        elif vertex2[current_node] is not None and not visited[vertex2[current_node]]:
+            # 현재 노드를 방문한 노드 기록에 저장하고
+            stack.append(current_node)
+            # 현재 노드 정보를 다음 목적지로 변경
+            current_node = vertex2[current_node]
+            # 다음 목적지 방문 기록을 True로 변경
+            visited[current_node] = True
 
-    # 연결된 노드가 없을 때
-    return 0
+        # 연결된 노드가 없을 때
+        else:
+            # 스택이 남아있으면
+            if stack:
+                # 꺼내서 되돌아간다.
+                current_node = stack.pop()
+            # 스택이 남아있지 않으면
+            else:
+                # 더이상 진행 불가하니까 종료
+                return 0
 
 
 # 테스트 케이스는 10개

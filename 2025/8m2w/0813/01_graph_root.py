@@ -3,14 +3,13 @@ sys.stdin = open("graph_root_input.txt", mode='r')
 sys.stdout = open("graph_root_output.txt", mode='w') 
 
 def find_path(graph, S, G, visited):
-    # 스택에 S를 넣고 탐색 시작
+    # 스택
+    stack = []
     # 출발을 어디서부터 했는지 입력
-    stack = [S]
-    visited[S] = True    
+    current_node = S
+    visited[current_node] = True    
     # 스택에 값이 있다면 계속 반복
-    while stack:
-        # 현재 노드는 스택에 있는 마지막 값 꺼내서 확인
-        current_node = stack.pop()
+    while True:
         # 만약 현재 노드가 도착 노드이면
         if current_node == G:
             return 1
@@ -18,11 +17,21 @@ def find_path(graph, S, G, visited):
         for neighbor in graph[current_node]:
             # 인접 노드에 방문한 적이 없다면.
             if not visited[neighbor]:
+                stack.append(current_node)
                 # 인접 노드 방문 기록 True
                 visited[neighbor] = True
                 # 스택에 인접 노드 등록 - 노드로 이동했다는 뜻
-                stack.append(neighbor)
-
+                current_node = neighbor
+                # 이동 했으니 다른 정점 탐색 X
+                break
+        else:
+            # 갈수 있는 정점 nv를 발견하지 못했다.
+            # 스택에서 돌아갈 위치를 하나 꺼내서 현재위치 변경
+            # 스택이 비어있는지 확인
+            if stack:
+                current_node = stack.pop()
+            else:
+                break
     return 0 # 종점 노드에 도착하지 못했다면 0을 반환
 
 T = int(input())
