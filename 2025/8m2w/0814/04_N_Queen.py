@@ -1,6 +1,6 @@
-import sys
-sys.stdin = open("N_queen_input.txt", mode='r')
-sys.stdout = open("N_queen_output.txt", mode='w') 
+# import sys
+# sys.stdin = open("N_queen_input.txt", mode='r')
+# sys.stdout = open("N_queen_output.txt", mode='w') 
 
 def solve(row):
     global result
@@ -29,9 +29,9 @@ def solve(row):
 # 전역 변수 선언 (함수 바깥에 위치)
 # 체스 말을 두었을 때 열 값 - 어차피 못놓음
 is_col = []
-# 좌상 우하 - 왼쪽 아래 부분 부터 값을 잰다. 
+# 좌상 우하 - 왼쪽 아래 부분 부터 값을 잰다. \ 
 is_diag1 = []
-# 좌하 우상 - 0,0 에서 부터 대각선을 잰다.
+# 좌하 우상 - 0,0 에서 부터 대각선을 잰다. /
 is_diag2 = []
 N = 0
 result = 0
@@ -42,9 +42,11 @@ for test_case in range(1, T + 1):
     
     # 각 테스트 케이스마다 배열 초기화
     is_col = [False] * N
-    # 좌상 우하
+    # 좌상 우하 - 왼쪽 제일 아래 배열부터 대각선 시작
+    # 2*N-1인 이유는 대각선의 개수 때문에 4개면 7개 3개면 5개다 그려봐라
     is_diag1 = [False] * (2 * N - 1)
-    # 좌하 우상
+    # 좌하 우상 - 0,0 부터 대각선 시작
+    # 2*N-1인 이유는 대각선의 개수 때문에 4개면 7개 3개면 5개다 그려봐라
     is_diag2 = [False] * (2 * N - 1)
 
     result = 0
