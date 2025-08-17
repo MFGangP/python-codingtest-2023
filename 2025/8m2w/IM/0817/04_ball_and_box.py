@@ -19,4 +19,4 @@ for testcase in range(1, T+1):
         # 5. 최대 점수 = 기본 점수 + (이득 * 바꿀 수 있는 횟수)
         score += num_swaps * profit
     
-    print(f"#{testcase} {score}")
+    print(f"{score}")
