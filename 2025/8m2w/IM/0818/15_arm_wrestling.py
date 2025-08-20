@@ -14,6 +14,7 @@ for testcase in range(1, T+1):
     for result in S:
         if result == "o":
             win_num += 1
+            
     # 소정이가 점심값을 면제받을 가능성이 있으면 Yes 없으면 NO
     if (15 - len(S) + win_num >= 8):
         print(f"#{testcase} YES")
