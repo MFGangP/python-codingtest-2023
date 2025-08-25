@@ -4,42 +4,34 @@ sys.stdout = open("omok_output.txt", "w")
 
 T = int(input())
 
+# 네 방향 (→, ↓, ↘, ↗)
+directions = [(0,1), (1,0), (1,1), (-1,1)]
+
 for testcase in range(1, T+1):
-    # N은 NxN 오목판 크기
     N = int(input())
+    board = [list(input().strip()) for _ in range(N)]
 
-    # NxN 배열
-    array = [list(input()) for _ in range(N)]
-
-    is_posible_omok = False
+    is_possible = False
 
     for i in range(N):
         for j in range(N):
-            if array[i][j] == "o":
-                sum_omok = 1
-            else:
-                sum_omok = 0
-            di = [-1, -1, 0, -1]
-            dj = [0, -1, -1, 1]
-            for x in range(4):
-                for c in range(1, N):
-                    ni, nj = i-di[x]*c, j-dj[x]*c
-                    if 0<=ni<N and 0<=nj<N:
-                        if array[ni][nj] == "o":
-                            sum_omok += 1
-                            if sum_omok >= 5:
-                                is_posible_omok = True
+            if board[i][j] == "o":
+                for di, dj in directions:
+                    cnt = 1
+                    ni, nj = i, j
+                    for _ in range(4):  # 이미 시작점 포함했으니 4칸만 더 보면 됨
+                        ni += di
+                        nj += dj
+                        if 0 <= ni < N and 0 <= nj < N and board[ni][nj] == "o":
+                            cnt += 1
                         else:
-                            sum_omok = 0
-                            
-                    ni, nj = i+di[x]*c, j+dj[x]*c
-                    if 0<=ni<N and 0<=nj<N:
-                        if array[ni][nj] == "o":
-                            sum_omok += 1
-                            if sum_omok >= 5:
-                                is_posible_omok = True
-                        else:
-                            sum_omok = 0
+                            break
+                    if cnt >= 5:
+                        is_possible = True
+                        break
+            if is_possible:
+                break
+        if is_possible:
+            break
 
-    print(f"#{testcase} ", end="")
-    print("YES" if is_posible_omok else "NO")
+    print(f"#{testcase} {'YES' if is_possible else 'NO'}")
