@@ -6,13 +6,10 @@ T = int(input())
 
 def check(row, col):
     is_posible = True
-    # 같은 열에 있는지 확인
-    x = row-1
-    # x가 범위 안에 있는 동안 지속
-    while x >= 0:
-        # row, col 위에 퀸이 있다면
-        if visited[x][col]:
-            is_posible = False
+    # 같은 열 확인
+    for i in range(row):
+        if visited[i][col]:
+            return False
 
     # 왼쪽 대각선에 있는지 확인
     i, j = row-1, col-1
@@ -21,15 +18,18 @@ def check(row, col):
         # 왼쪽 대각선 위에 퀸이 있다면
         if visited[i][j]:
             is_posible = False
-
+        i -= 1
+        j -= 1
     # 오른쪽 대각선에 있는지 확인
     p, q = row-1, col+1
     # i, j 가 범위 안에 있는 동안 지속
-    while p >= 0 and q >= 0:
+    while p >= 0 and q < N:
         # 왼쪽 대각선 위에 퀸이 있다면
         if visited[p][q]:
             is_posible = False
-
+        p -= 1
+        q += 1
+        
     return is_posible
 
 def solve(row):
@@ -54,8 +54,6 @@ for tc in range(1, T+1):
     result = 0
     # N : 보드 크기
     N = int(input())
-    # NxN 체스판
-    matrix = [[0] * N for _ in range(N)]
     # 방문 기록
     visited = [[0] * N for _ in range(N)]
 
