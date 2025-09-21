@@ -3,11 +3,15 @@
 #include <iostream>
 #include <vector>
 #include <cstdio>
+#include <cmath> 
 
 int main(int argc, char** argv)
 {
+    freopen("max_min_distance_input.txt", "r", stdin);
+
     int test_case;
     int T, N;
+    int max_index, min_index ;
 
     std::cin >> T;
 
@@ -15,20 +19,25 @@ int main(int argc, char** argv)
     {
         std::cin >> N;
 
-        // 1. ¿Ã¹Ù¸¥ vector ¼±¾ð: Å©±â NÀ» »ý¼ºÀÚ °ýÈ£ ()¿¡ Àü´Þ
+        // 1. ï¿½Ã¹Ù¸ï¿½ vector ï¿½ï¿½ï¿½ï¿½: Å©ï¿½ï¿½ Nï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ ()ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         std::vector<int> arr(N);
 
-        // 2. ¿Ã¹Ù¸¥ vector ÀÔ·Â: ¹Ýº¹¹®À¸·Î °¢ ¿ø¼Ò arr[i]¿¡ Á÷Á¢ ÀÔ·Â
+        // 2. ï¿½Ã¹Ù¸ï¿½ vector ï¿½Ô·ï¿½: ï¿½Ýºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ arr[i]ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½
         for (int i = 0; i < N; i++) {
             std::cin >> arr[i];
         }
 
         std::cout << "#" << test_case << " ";
-        // ÀÔ·Â È®ÀÎ¿ë Ãâ·Â
+        // ï¿½Ô·ï¿½ È®ï¿½Î¿ï¿½ ï¿½ï¿½ï¿½
         for (int i = 0; i < arr.size(); i++) {
-            std::cout << arr[i] << " ";
+            if(arr[i] < arr[min_index]){
+                min_index = i;
+            }
+            if(arr[i] >= arr[max_index]){
+                max_index = i;
+            }
         }
-        std::cout << std::endl; // 3. ¼¼¹ÌÄÝ·Ð Ãß°¡ ¹× ÁÙ¹Ù²Þ
+        std::cout << abs(max_index - min_index) << std::endl; // 3. ï¿½ï¿½ï¿½ï¿½ï¿½Ý·ï¿½ ï¿½ß°ï¿½ ï¿½ï¿½ ï¿½Ù¹Ù²ï¿½
     }
     return 0;
 }
