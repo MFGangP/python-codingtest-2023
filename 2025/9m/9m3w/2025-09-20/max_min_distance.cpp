@@ -19,16 +19,14 @@ int main(int argc, char** argv)
     {
         std::cin >> N;
 
-        // 1. �ùٸ� vector ����: ũ�� N�� ������ ��ȣ ()�� ����
         std::vector<int> arr(N);
 
-        // 2. �ùٸ� vector �Է�: �ݺ������� �� ���� arr[i]�� ���� �Է�
         for (int i = 0; i < N; i++) {
             std::cin >> arr[i];
         }
 
         std::cout << "#" << test_case << " ";
-        // �Է� Ȯ�ο� ���
+
         for (int i = 0; i < arr.size(); i++) {
             if(arr[i] < arr[min_index]){
                 min_index = i;
@@ -37,7 +35,7 @@ int main(int argc, char** argv)
                 max_index = i;
             }
         }
-        std::cout << abs(max_index - min_index) << std::endl; // 3. �����ݷ� �߰� �� �ٹٲ�
+        std::cout << abs(max_index - min_index) << std::endl;
     }
     return 0;
 }
