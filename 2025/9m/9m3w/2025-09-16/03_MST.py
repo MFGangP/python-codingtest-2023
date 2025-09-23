@@ -23,8 +23,9 @@ for tc in range(1, T+1):
     # 노드 번호 V
     # 간선의 개수 E
     V, E = map(int, input().split())
-
+    # 간선 갯수 세기
     edge_count = 0
+    # 최소 가중치
     min_weight = 0
     
     edges = []
@@ -34,7 +35,7 @@ for tc in range(1, T+1):
         n1, n2, w = list(map(int, input().split()))
         # n1에서 n2로 가는 w의 가중치를 가진 간선의 정보
         edges.append((n1, n2, w))
-
+    # 
     edges.sort(key=lambda x : x[2])
 
     parent = [i for i in range(V + 1)]
