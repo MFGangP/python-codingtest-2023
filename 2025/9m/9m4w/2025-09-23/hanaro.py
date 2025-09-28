@@ -16,8 +16,17 @@ def prim(start):
 
     while heap:
         w, v = heappop(heap)
+        # 
+        if min_w < w:
+            continue
 
-        
+            
+# IM 수준 1문제, A형 수준 1문제
+# 파리 퇴치, 1959. 두 개의 숫자열, solvingclub 추가문제 태양열에너지
+# DFS, BFS, MST, Dijkstra
+# 간단히 설명할 수 있도록 정리.
+# 그림으로 이해하기.
+# 실습 문제 풀어보기.
 
 
 T = int(input())
